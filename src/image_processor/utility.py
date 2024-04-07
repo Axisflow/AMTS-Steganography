@@ -3,7 +3,6 @@ import numpy as np
 from typing import Union
 import matplotlib.pyplot as plt
 from matplotlib.colors import Colormap
-import math
 
 def isOdd(x: int) -> bool:
     return bool(x & 1)
@@ -22,23 +21,6 @@ def rebase(input_array, input_bit_num: int, output_bit_num: int) -> list[int]:
         return input_array
     else:
         return rebase_1N(rebase_N1(input_array, input_bit_num), output_bit_num)
-    
-# def rebase(input_array, input_bit_num: int, output_bit_num: int) -> list[int]:
-#     bits = []
-#     tmp = []
-#     for i in range(len(input_array)):
-#         tmp = []
-#         for j in range(input_bit_num):
-#             tmp.append(bitget(input_array[i], j))
-#         bits = tmp + bits
-#     bits.reverse()
-    
-#     bits += [0] * ((output_bit_num - len(bits)) % output_bit_num)
-#     output_array = []
-#     for i in range(0, len(bits), output_bit_num):
-#         output_array.append(int(''.join(map(str, bits[i:i+output_bit_num])), 2))
-
-#     return output_array
 
 def rebase_N1(input_array, input_bit_num: int) -> list[int]:
     tmp = np.array(input_array).astype(np.uint)
@@ -69,24 +51,11 @@ def crop(arr: np.ndarray, location: list[int], length: list[int]):
 def crop2D(img: np.ndarray, x: int, y: int, w: int, h: int):
     return crop(img, [y, x], [h, w])
 
-# def load_image_path(path: str, color: int = cv.IMREAD_COLOR, covert_code: None | int = cv.COLOR_BGR2RGB):
-#     if covert_code is None:
-#         return np.array(cv.imread(path, color))
-#     else:
-#         return np.array(cv.cvtColor(cv.imread(path, color), covert_code))
-
 def load_image_path(path: str, color: int = cv.IMREAD_COLOR, covert_code: Union[None, int] = cv.COLOR_BGR2RGB):
     if covert_code is None:
         return np.array(cv.imread(path, color))
     else:
         return np.array(cv.cvtColor(cv.imread(path, color), covert_code))
-
-
-# def save_image_path(path: str, img: np.ndarray, covert_code: None | int = cv.COLOR_RGB2BGR):
-#     if covert_code is None:
-#         cv.imwrite(path, img)
-#     else:
-#         cv.imwrite(path, cv.cvtColor(img, covert_code))
     
 def save_image_path(path: str, img: np.ndarray, covert_code: Union[None, int] = cv.COLOR_RGB2BGR):
     if covert_code is None:
