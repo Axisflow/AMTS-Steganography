@@ -40,7 +40,7 @@ def rebase_1N(input_array, output_bit_num: int) -> list[int]:
 
     return list(output_array)
 
-def crop(arr: np.ndarray, location: list[int], length: list[int]):
+def crop(arr: np.ndarray, location: list[int], length: list[int]) -> np.ndarray:
     # crop a multi-dimensional array
     # arr: the array to be cropped
     # location: the location of the first element to be cropped
@@ -48,10 +48,10 @@ def crop(arr: np.ndarray, location: list[int], length: list[int]):
     # return: the cropped array
     return arr[tuple([slice(location[i], location[i]+length[i]) for i in range(len(location))])]
 
-def crop2D(img: np.ndarray, x: int, y: int, w: int, h: int):
+def crop2D(img: np.ndarray, x: int, y: int, w: int, h: int) -> np.ndarray:
     return crop(img, [y, x], [h, w])
 
-def load_image_path(path: str, color: int = cv.IMREAD_COLOR, covert_code: Union[None, int] = cv.COLOR_BGR2RGB):
+def load_image_path(path: str, color: int = cv.IMREAD_COLOR, covert_code: Union[None, int] = cv.COLOR_BGR2RGB) -> np.ndarray:
     if covert_code is None:
         return np.array(cv.imread(path, color))
     else:
@@ -59,9 +59,9 @@ def load_image_path(path: str, color: int = cv.IMREAD_COLOR, covert_code: Union[
     
 def save_image_path(path: str, img: np.ndarray, covert_code: Union[None, int] = cv.COLOR_RGB2BGR):
     if covert_code is None:
-        cv.imwrite(path, img)
+        cv.imwrite(path, img.astype(np.uint8))
     else:
-        cv.imwrite(path, cv.cvtColor(img, covert_code))
+        cv.imwrite(path, cv.cvtColor(img.astype(np.uint8), covert_code))
 
 def show_image(img: np.ndarray, title = "", cmp: Union[None, str , Colormap] = None):
     if cmp is None:
@@ -72,10 +72,10 @@ def show_image(img: np.ndarray, title = "", cmp: Union[None, str , Colormap] = N
     plt.title(title)
     plt.show()
 
-def PSNR(img1: np.ndarray, img2: np.ndarray, max_value = 255):
+def PSNR(img1: np.ndarray, img2: np.ndarray, max_value = 255) -> float:
     MSE = np.mean((img1.astype(np.float64) - img2.astype(np.float64)) ** 2)
     
     if MSE == 0:
-        return 100
+        return 100.0
     else:
         return 10 * np.log10(max_value ** 2 / MSE)
