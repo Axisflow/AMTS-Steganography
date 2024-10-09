@@ -6,6 +6,13 @@
 
 This is a project for the paper "Data Hiding in Color Images Using Adjacent Mean with Threshold Shifting."
 
+## Example
+
+|                                  Cover Image                                  |                                  Stego Image                                  |
+| :----------------------------------------------------------------------------: | :----------------------------------------------------------------------------: |
+| ![Cover Image](https://axisflow.github.io/AMTS-Steganography/docs/Jet.cover.png) | ![Stego Image](https://axisflow.github.io/AMTS-Steganography/docs/Jet.stego.png) |
+|                                    Original                                    |        Hide the whole `README.md` file with `T = 5` and `N = 1`        |
+
 ## Documentation
 
 There is complete example of embedding and extracting information in `usage.ipynb`.
