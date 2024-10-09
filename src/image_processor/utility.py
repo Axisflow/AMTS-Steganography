@@ -59,9 +59,9 @@ def load_image_path(path: str, color: int = cv.IMREAD_COLOR, covert_code: Union[
     
 def save_image_path(path: str, img: np.ndarray, covert_code: Union[None, int] = cv.COLOR_RGB2BGR):
     if covert_code is None:
-        cv.imwrite(path, img.astype(np.uint8))
+        cv.imwrite(path, img)
     else:
-        cv.imwrite(path, cv.cvtColor(img.astype(np.uint8), covert_code))
+        cv.imwrite(path, cv.cvtColor(img, covert_code))
 
 def show_image(img: np.ndarray, title = "", cmp: Union[None, str , Colormap] = None):
     if cmp is None:
