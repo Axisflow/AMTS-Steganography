@@ -72,10 +72,16 @@ def show_image(img: np.ndarray, title = "", cmp: Union[None, str , Colormap] = N
     plt.title(title)
     plt.show()
 
+def diff_sum(img1: np.ndarray, img2: np.ndarray) -> int:
+    return np.sum(np.abs(img1 - img2))
+
+def mse(img1: np.ndarray, img2: np.ndarray) -> float:
+    return np.mean((img1.astype(np.float64) - img2.astype(np.float64)) ** 2)
+
 def PSNR(img1: np.ndarray, img2: np.ndarray, max_value = 255) -> float:
-    MSE = np.mean((img1.astype(np.float64) - img2.astype(np.float64)) ** 2)
+    MSE = mse(img1, img2)
     
     if MSE == 0:
-        return 100.0
+        return np.inf
     else:
         return 10 * np.log10(max_value ** 2 / MSE)
