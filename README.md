@@ -1,4 +1,4 @@
-# AMTS Stegnography
+# AMTS Steganography
 
 **Home**: [https://github.com/Axisflow/AMTS-Steganography](https://github.com/Axisflow/AMTS-Steganography)
 
