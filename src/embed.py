@@ -22,15 +22,15 @@ def embed_endpoint(image: np.ndarray[tuple[Any, Any, Literal[3]], np.dtype[np.in
     bits_num =  int(np.ceil(np.log2(h - 2)))
     for i in range(1, bits_num):
         loc = i << 1 + 2
-        result[loc, 0, 1] = bitset(image[loc, 0, 1], 0, bitget(c, i))
+        result[loc, 0, 2] = bitset(image[loc, 0, 2], 0, bitget(c, i))
 
     bits_num =  int(np.ceil(np.log2(w - 2)))
     for i in range(1, bits_num):
         loc = i << 1 + 2
-        result[0, loc, 1] = bitset(image[0, loc, 1], 0, bitget(r, i))
+        result[0, loc, 2] = bitset(image[0, loc, 2], 0, bitget(r, i))
 
-    result[h - 1, w - 1, 1] = bitset(image[h - 1, w - 1, 1], 0, bitget(e, 0))
-    result[h - 1, w - 1, 1] = bitset(result[h - 1, w - 1, 1], 1, bitget(e, 1))
+    result[h - 1, w - 1, 0] = bitset(image[h - 1, w - 1, 0], 0, bitget(e, 0))
+    result[h - 1, w - 1, 2] = bitset(image[h - 1, w - 1, 2], 0, bitget(e, 1))
     return result
 
 def embed_data(image: np.ndarray[tuple[Any, Any, Literal[3]], np.dtype[np.int16]], decimal_data: list[int], N: int,

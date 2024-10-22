@@ -16,17 +16,17 @@ def extract_endpoint(stego_image: np.ndarray[tuple[Any, Any, Literal[3]], np.dty
     r = 0
     for i in range(1, bits_num):
         loc = i << 1 + 2
-        r = bitset(r, i, bitget(stego_image[loc, 0, 1], 0))
+        r = bitset(r, i, bitget(stego_image[loc, 0, 2], 0))
 
     bits_num =  int(np.ceil(np.log2(w - 2)))
     c = 0
     for i in range(1, bits_num):
         loc = i << 1 + 2
-        c = bitset(c, i, bitget(stego_image[0, loc, 1], 0))
+        c = bitset(c, i, bitget(stego_image[0, loc, 2], 0))
 
     e = 0
-    e = bitset(e, 0, bitget(stego_image[h - 1, w - 1, 1], 0))
-    e = bitset(e, 1, bitget(stego_image[h - 1, w - 1, 1], 1))
+    e = bitset(e, 0, bitget(stego_image[h - 1, w - 1, 0], 0))
+    e = bitset(e, 0, bitget(stego_image[h - 1, w - 1, 2], 1))
 
     return EmbedableRGB.Point(r + 1, c + 1, e)
 
